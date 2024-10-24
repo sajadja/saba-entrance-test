@@ -1,0 +1,61 @@
+<style>
+
+html {
+  direction: rtl;
+}
+
+table, th, td {
+  border: 1px solid black;
+  border-collapse: collapse;
+  padding: 5px;
+}
+
+.add-mobile {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 50px;
+}
+
+</style>
+
+<form action="" method="get">
+  {{ filter.form.as_p }}
+  <input type="submit" value="فیلتر اطلاعات"/>
+</form>
+
+<table>
+    <tr>
+      <th>نام برند</th>
+      <th>ملیت برند</th>
+      <th>مدل گوشی</th>
+      <th>قیمت</th>
+      <th>رنگ</th>
+      <th>سایز صفحه نمایش</th>
+      <th>وضعیت</th>
+      <th>کشور سازنده</th>
+    </tr>
+
+    {% for object in object_list %}
+    <tr>
+        <td>{{ object.brand_name }}</td>
+        <td>{{ object.brand_nationality.name }}</td>
+        <td>{{ object.model }}</td>
+        <td>{{ object.price }}</td>
+        <td>{{ object.color }}</td>
+        <td>{{ object.screen_size }}</td>
+        <td>{{ object.is_availble }}</td>
+        <td>{{ object.made_in.name }}</td>
+    </tr>
+
+    {% empty %}
+    <div>
+      <h2>اطلاعاتی یافت نشد.</h2>
+    </div>
+    {% endfor %}
+
+  </table>
+
+<div class="add-mobile">
+<a href="{% url 'create-mobile' %}"><button>اضافه کردن موبایل</button></a>
+</div>

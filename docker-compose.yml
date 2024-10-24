@@ -1,0 +1,29 @@
+services:
+
+  django:
+    build:
+      context: .
+    ports:
+      - 80:8000
+    depends_on:
+      - db
+    volumes:
+      - static_volume:/code/static
+      - media_volume:/code/media
+    command:
+      - ./entrypoint.sh
+
+  db:
+    image: postgres:17
+    restart: always
+    environment:
+      - POSTGRES_USER=mobileuser
+      - POSTGRES_PASSWORD=123
+      - POSTGRES_DB=core
+    volumes:
+      - ./postgres-data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:
+  static_volume:
+  media_volume:
